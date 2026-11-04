@@ -1,0 +1,32 @@
+baseURL: https://hojenaia.github.io/
+languageCode: pt-br
+defaultContentLanguage: pt-br
+title: Marcell Freitas
+theme: hextra
+enableRobotsTXT: true
+module:
+  imports:
+    - path: github.com/imfing/hextra
+params:
+  description: Anotações sobre software, IA local, hardware e experimentos.
+  navbar:
+    displayTitle: true
+    displayLogo: false
+  footer:
+    displayCopyright: true
+    displayPoweredBy: false
+  theme:
+    default: system
+    displayToggle: true
+menu:
+  main:
+    - name: Artigos
+      pageRef: /posts
+      weight: 1
+    - name: Sobre
+      pageRef: /about
+      weight: 2
+outputs:
+  home: [HTML, RSS, JSON]
+  page: [HTML]
+  section: [HTML, RSS]
