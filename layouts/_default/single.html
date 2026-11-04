@@ -1,0 +1,13 @@
+{{ define "main" }}
+{{- if eq .Section "posts" -}}
+<main class="hnia-article">
+  <h1>{{ .Title }}</h1>
+  <div class="hnia-tags">{{ range .Params.tags }}<a href="{{ "tags/" | relLangURL }}{{ . | urlize }}/">#{{ . }}</a>{{ end }}</div>
+  <div class="hnia-date"><time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date | time.Format ":date_long" }}</time></div>
+  {{ with .Params.summary }}<aside class="hnia-summary"><strong>{{ if eq $.Site.Language.Lang "en" }}TL;DR{{ else }}Resumo{{ end }}</strong><p>{{ . }}</p></aside>{{ end }}
+  <div class="content">{{ .Content }}</div>
+</main>
+{{- else -}}
+<main class="hnia-page hnia-article"><h1>{{ .Title }}</h1><div class="content">{{ .Content }}</div></main>
+{{- end -}}
+{{ end }}

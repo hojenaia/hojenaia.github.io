@@ -1,8 +1,18 @@
 baseURL: https://hojenaia.github.io/
 locale: pt-BR
 defaultContentLanguage: pt-br
-title: Marcell Freitas
-enableRobotsTXT: true
+defaultContentLanguageInSubdir: false
+languages:
+  pt-br:
+    label: PT
+    weight: 1
+    title: Hoje na IA
+    contentDir: content
+  en:
+    label: EN
+    weight: 2
+    title: Hoje na IA
+    contentDir: content/en
 module:
   imports:
     - path: github.com/imfing/hextra
@@ -12,20 +22,46 @@ params:
     displayTitle: true
     displayLogo: false
   footer:
-    displayCopyright: true
+    displayCopyright: false
     displayPoweredBy: false
   theme:
-    default: system
+    default: dark
     displayToggle: true
 menu:
   main:
-    - name: Artigos
+    - name: Blog
       pageRef: /posts
       weight: 1
     - name: Sobre
       pageRef: /about
       weight: 2
+    - name: Cursos
+      url: https://www.youtube.com/@HojeNaIA/courses
+      weight: 3
+      params:
+        external: true
+    - name: Discord
+      url: https://discord.gg/hfzj3YtUtv
+      weight: 4
+      params:
+        external: true
+    - name: Canal
+      url: https://www.youtube.com/@HojeNaIA
+      weight: 5
+      params:
+        external: true
+    - name: theme-toggle
+      weight: 6
+      params:
+        type: theme-toggle
+        label: false
+    - name: language-switch
+      weight: 7
+      params:
+        type: language-switch
+        label: true
 outputs:
-  home: [HTML, RSS, JSON]
+  home: [HTML, RSS]
   page: [HTML]
   section: [HTML, RSS]
+enableRobotsTXT: true

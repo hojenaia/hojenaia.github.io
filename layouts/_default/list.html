@@ -1,0 +1,6 @@
+{{ define "main" }}
+<main class="hnia-page">
+  <header class="hnia-home-heading"><h1>{{ .Title }}</h1>{{ with .Content }}<div class="content">{{ . }}</div>{{ end }}</header>
+  {{ partial "post-archive.html" . }}
+</main>
+{{ end }}

@@ -1,0 +1,6 @@
+{{ define "main" }}
+<main class="hnia-page">
+  <header class="hnia-home-heading"><h1>{{ if eq .Site.Language.Lang "en" }}Latest articles{{ else }}Artigos recentes{{ end }}</h1></header>
+  {{ partial "post-archive.html" . }}
+</main>
+{{ end }}

@@ -1,0 +1,33 @@
+{{- $posts := where site.RegularPages "Section" "posts" -}}
+{{- if eq .Kind "term" -}}{{- $posts = .Pages -}}{{- end -}}
+{{- $posts = sort $posts "Date" "desc" -}}
+<div class="hnia-toolbar">
+  <span>{{ len $posts }} {{ if eq $.Site.Language.Lang "en" }}{{ if eq (len $posts) 1 }}article{{ else }}articles{{ end }}{{ else }}{{ if eq (len $posts) 1 }}artigo{{ else }}artigos{{ end }}{{ end }}</span>
+  <div class="hnia-view-toggle" role="group" aria-label="{{ if eq .Site.Language.Lang "en" }}Article layout{{ else }}Visualização dos artigos{{ end }}">
+    <button type="button" data-view="list" aria-pressed="true">☰ {{ if eq .Site.Language.Lang "en" }}List{{ else }}Lista{{ end }}</button>
+    <button type="button" data-view="grid" aria-pressed="false">▦ {{ if eq .Site.Language.Lang "en" }}Grid{{ else }}Grade{{ end }}</button>
+  </div>
+</div>
+<div class="hnia-archive" data-view="list">
+{{- range ($posts.GroupByDate "January 2006") -}}
+  {{- $monthPage := index .Pages 0 -}}
+  <section class="hnia-month">
+    <div class="hnia-month-title">
+      <h2>{{- if eq $.Site.Language.Lang "en" -}}{{ .Key }}{{- else -}}{{- $months := slice "janeiro" "fevereiro" "março" "abril" "maio" "junho" "julho" "agosto" "setembro" "outubro" "novembro" "dezembro" -}}{{- index $months (sub (int ($monthPage.Date.Format "1")) 1) }} {{ $monthPage.Date.Format "2006" }}{{- end -}}</h2>
+      <span>{{ len .Pages }} {{ if eq $.Site.Language.Lang "en" }}{{ if eq (len .Pages) 1 }}article{{ else }}articles{{ end }}{{ else }}{{ if eq (len .Pages) 1 }}artigo{{ else }}artigos{{ end }}{{ end }}</span>
+    </div>
+    <div class="hnia-posts">
+      {{- range .Pages }}
+      <article class="hnia-card">
+        <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "Jan 02" }}</time>
+        <div class="hnia-card-content">
+          <h3><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
+          {{ with .Params.summary }}<p>{{ . }}</p>{{ else }}<p>{{ .Description }}</p>{{ end }}
+        </div>
+        <div class="hnia-tags">{{ range .Params.tags }}<a href="{{ "tags/" | relLangURL }}{{ . | urlize }}/">#{{ . }}</a>{{ end }}</div>
+      </article>
+      {{- end }}
+    </div>
+  </section>
+{{- end -}}
+</div>

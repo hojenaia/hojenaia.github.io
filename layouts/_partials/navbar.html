@@ -1,0 +1,29 @@
+{{- $iconHeight := 24 -}}
+<div class="hextra-nav-container hx:sticky hx:top-0 hx:z-20 hx:w-full hx:bg-transparent hx:print:hidden">
+  <div class="hextra-nav-container-blur hx:pointer-events-none hx:absolute hx:z-[-1] hx:h-full hx:w-full hx:bg-white hx:dark:bg-dark hx:shadow-[0_2px_4px_rgba(0,0,0,.02),0_1px_0_rgba(0,0,0,.06)] hx:dark:shadow-[0_-1px_0_rgba(255,255,255,.1)_inset]"></div>
+  <nav class="hextra-max-navbar-width hx:mx-auto hx:flex hx:items-center hx:justify-end hx:gap-1 hx:md:gap-2 hx:h-[var(--hextra-navbar-height)] hx:px-6">
+    {{ partial "navbar-title.html" . }}
+    {{- range .Site.Menus.main -}}
+      {{- if and (ne .Params.type "theme-toggle") (ne .Params.type "language-switch") -}}
+        {{- $link := .URL -}}
+        {{- with .PageRef -}}{{- if hasPrefix . "/" -}}{{- $link = relLangURL (strings.TrimPrefix "/" .) -}}{{- end -}}{{- end -}}
+        <a class="hnia-desktop-link hx:hidden hx:md:inline-flex hx:items-center hx:px-2 hx:py-2 hx:text-sm hx:text-current hx:hover:opacity-70" href="{{ $link | safeURL }}" {{ if .Params.external }}target="_blank" rel="noopener noreferrer"{{ end }}>{{- if and (eq $.Site.Language.Lang "en") (eq .Name "Sobre") -}}About{{- else if and (eq $.Site.Language.Lang "en") (eq .Name "Cursos") -}}Courses{{- else if and (eq $.Site.Language.Lang "en") (eq .Name "Canal") -}}Channel{{- else -}}{{ .Name }}{{- end -}}</a>
+      {{- end -}}
+    {{- end -}}
+    <form class="hnia-search" action="https://duckduckgo.com/" method="get" role="search">
+      <input type="search" name="q" aria-label="{{ if eq .Site.Language.Lang "en" }}Search this site{{ else }}Buscar no site{{ end }}" placeholder="{{ if eq .Site.Language.Lang "en" }}Search with DuckDuckGo…{{ else }}Buscar no site (DuckDuckGo)…{{ end }}">
+      <button aria-label="{{ if eq .Site.Language.Lang "en" }}Search{{ else }}Buscar{{ end }}" type="submit">⌕</button>
+    </form>
+    {{ partial "theme-toggle.html" (dict "iconHeight" $iconHeight "hideLabel" true "location" "top" "class" "hx:p-1 hx:md:p-2") }}
+    {{ partial "language-switch.html" (dict "context" . "grow" false "hideLabel" true "iconHeight" $iconHeight "location" "top" "class" "hx:p-1 hx:md:p-2") }}
+    <button type="button" data-hnia-menu aria-label="{{ if eq .Site.Language.Lang "en" }}Menu{{ else }}Menu{{ end }}" aria-expanded="false" class="hnia-menu-button hx:cursor-pointer hx:rounded-sm hx:p-1 hx:md:hidden">{{ partial "utils/icon.html" (dict "name" "hamburger-menu" "attributes" (printf "height=%d" $iconHeight)) }}</button>
+  </nav>
+  <div class="hnia-mobile-nav" data-hnia-mobile-nav>
+    {{- range .Site.Menus.main -}}
+      {{- if and (ne .Params.type "theme-toggle") (ne .Params.type "language-switch") -}}
+        {{- $link := .URL -}}{{- with .PageRef -}}{{- if hasPrefix . "/" -}}{{- $link = relLangURL (strings.TrimPrefix "/" .) -}}{{- end -}}{{- end -}}
+        <a href="{{ $link | safeURL }}" {{ if .Params.external }}target="_blank" rel="noopener noreferrer"{{ end }}>{{- if and (eq $.Site.Language.Lang "en") (eq .Name "Sobre") -}}About{{- else if and (eq $.Site.Language.Lang "en") (eq .Name "Cursos") -}}Courses{{- else if and (eq $.Site.Language.Lang "en") (eq .Name "Canal") -}}Channel{{- else -}}{{ .Name }}{{- end -}}</a>
+      {{- end -}}
+    {{- end -}}
+  </div>
+</div>

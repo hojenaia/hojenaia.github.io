@@ -2,6 +2,7 @@
 title: "Qwen3.8 Flash-Next numa RTX PRO 6000: os testes que faltavam"
 date: 2026-11-04T12:00:00-03:00
 description: "Medi Qwen3.8 Flash-Next Q2_0, IQ3_S e UD-Q4_K_XL no Basalt com uma RTX PRO 6000 Blackwell: velocidade, VRAM e resultados em testes de programação."
+summary: "Na RTX PRO 6000 de 96 GB, comparei três quantizações do Qwen3.8 Flash-Next no Basalt. Q2_0 foi a mais rápida e todas passaram pelo hard canary; Q4 coube com folga, mas levou mais tempo nos testes de programação."
 tags: [IA, benchmarks, hardware]
 draft: false
 ---
@@ -16,7 +17,7 @@ Quantizar é representar os pesos com menos bits. Em geral, o arquivo fica menor
 
 Para servir esses packs usei o **Basalt**, um engine local derivado do Strata e otimizado para GPUs NVIDIA Blackwell. Ele carrega o modelo, administra o que fica na VRAM e expõe uma API compatível com OpenAI para que aplicações como o OpenCode conversem com ele. O artigo original já tinha usado Basalt na RTX 5090. Aqui mantive esse engine e mudei a peça que faltava: uma RTX PRO 6000 com 96 GB de VRAM, capaz de testar também o pack Q4.
 
-O [benchmark original do Akita](https://akitaonrails.com/2026/10/27/llm-benchmark-melhores-llms-open-source-hardware-caseiro/) comparou o Qwen3.8 Flash-Next em uma RTX 5090 e num Strix Halo. A conclusão prática foi interessante: no Basalt, a versão Q2_0 chegou perto de 400 tokens por segundo na 5090 e passou pelo teste difícil de programação. Mas ficou uma pergunta aberta: o que acontece com as versões maiores numa GPU com memória suficiente?
+O [benchmark de LLMs locais do Fabio Akita](https://akitaonrails.com/2026/10/27/llm-benchmark-melhores-llms-open-source-hardware-caseiro/) comparou o Qwen3.8 Flash-Next em uma RTX 5090 e num Strix Halo. A conclusão prática foi interessante: no Basalt, a versão Q2_0 chegou perto de 400 tokens por segundo na 5090 e passou pelo teste difícil de programação. Mas ficou uma pergunta aberta: o que acontece com as versões maiores numa GPU com memória suficiente?
 
 Eu tenho uma RTX PRO 6000 Blackwell com 96 GB de VRAM. Então preparei as configurações do Basalt, peguei os mesmos testes do repositório e rodei Q2_0, IQ3_S e UD-Q4_K_XL. A ideia não era inventar outra régua: era preencher a lacuna de hardware e quantizações que o artigo original deixou em aberto.
 
