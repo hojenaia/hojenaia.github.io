@@ -13,3 +13,9 @@ hugo server --buildDrafts
 ## Publicação
 
 O workflow `.github/workflows/pages.yaml` compila o site e publica no GitHub Pages a cada push em `main`. O endereço padrão é <https://hojenaia.github.io/>.
+
+## Conteúdo em dois idiomas
+
+O português é o idioma padrão do site. As páginas e os artigos em inglês ficam em `content/en/` e aparecem sob `/en/`; mantenha o mesmo caminho relativo do conteúdo em português para que o seletor de idioma encontre a página equivalente.
+
+Os layouts personalizados ficam em `layouts/`, enquanto estilos e interações do site ficam em `static/`.
