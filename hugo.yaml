@@ -2,7 +2,6 @@ baseURL: https://hojenaia.github.io/
 locale: pt-BR
 defaultContentLanguage: pt-br
 title: Marcell Freitas
-theme: hextra
 enableRobotsTXT: true
 module:
   imports:
