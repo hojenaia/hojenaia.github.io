@@ -35,8 +35,8 @@ menu:
     - name: Sobre
       pageRef: /about
       weight: 2
-    - name: Cursos
-      url: https://www.youtube.com/@HojeNaIA/courses
+    - name: Canal
+      url: https://www.youtube.com/@HojeNaIA
       weight: 3
       params:
         external: true
@@ -45,8 +45,8 @@ menu:
       weight: 4
       params:
         external: true
-    - name: Canal
-      url: https://www.youtube.com/@HojeNaIA
+    - name: Cursos
+      url: https://www.youtube.com/@HojeNaIA/courses
       weight: 5
       params:
         external: true
